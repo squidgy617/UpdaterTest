@@ -24,7 +24,6 @@ namespace TestApp
     {
         public MainWindow()
         {
-            VelopackApp.Build().Run();
             InitializeComponent();
             Update();
         }
