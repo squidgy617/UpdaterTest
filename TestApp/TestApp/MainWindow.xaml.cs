@@ -26,6 +26,7 @@ namespace TestApp
         {
             VelopackApp.Build().Run();
             InitializeComponent();
+            Update();
         }
 
         public async void Update()
