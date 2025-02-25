@@ -30,17 +30,24 @@ namespace TestApp
 
         public async void Update()
         {
-            var mgr = new UpdateManager(new GithubSource("https://https://github.com/squidgy617/UpdaterTest", null, false));
-
-            var newVersion = await mgr.CheckForUpdatesAsync();
-            if (newVersion == null)
+            try
             {
-                return;
+                var mgr = new UpdateManager(new GithubSource("https://https://github.com/squidgy617/UpdaterTest", null, false));
+
+                var newVersion = await mgr.CheckForUpdatesAsync();
+                if (newVersion == null)
+                {
+                    return;
+                }
+
+                await mgr.DownloadUpdatesAsync(newVersion);
+
+                mgr.ApplyUpdatesAndRestart(newVersion);
             }
+            catch
+            {
 
-            await mgr.DownloadUpdatesAsync(newVersion);
-
-            mgr.ApplyUpdatesAndRestart(newVersion);
+            }
         }
     }
 }
