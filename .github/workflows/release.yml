@@ -23,11 +23,6 @@ jobs:
       - name: Echo Version
         run: echo "The version is ${{ steps.get-version.outputs.version }}"
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "4.7.2" # Specify the version of .NET you're using
-
       - name: Publish .NET project
         run: dotnet publish -c Release --self-contained -r win-x64 -o .\publish
 
