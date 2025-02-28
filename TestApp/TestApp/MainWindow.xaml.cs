@@ -32,7 +32,7 @@ namespace TestApp
         {
             try
             {
-                var mgr = new UpdateManager(new GithubSource("https://https://github.com/squidgy617/UpdaterTest", null, false));
+                var mgr = new UpdateManager(new GithubSource("https://github.com/squidgy617/UpdaterTest", null, false));
 
                 var newVersion = await mgr.CheckForUpdatesAsync();
                 if (newVersion == null)
