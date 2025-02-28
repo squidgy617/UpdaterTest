@@ -44,9 +44,9 @@ namespace TestApp
 
                 mgr.ApplyUpdatesAndRestart(newVersion);
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.ToString());
             }
         }
     }
