@@ -36,11 +36,11 @@ jobs:
         run: msbuild TestApp/TestApp.sln /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Publish .NET Framework Project
-        run: msbuild TestApp/TestApp/TestApp.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:OutputPath="$(Build.ArtifactStagingDirectory)/publish"
+        run: msbuild TestApp/TestApp/TestApp.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:OutputPath="${{ github.workspace }}/publish"
 
       - name: Create Velopack Release
         run: |
           dotnet tool install -g vpk
           vpk download github --repoUrl https://github.com/squidgy617/UpdaterTest
-          vpk pack --packId WpfVelopack --packVersion ${{ steps.get-version.outputs.version }} --packDir "$(Build.ArtifactStagingDirectory)/publish" --mainExe TestApp.exe --packTitle TestApp
+          vpk pack --packId WpfVelopack --packVersion ${{ steps.get-version.outputs.version }} --packDir "${{ github.workspace }}/publish" --mainExe TestApp.exe --packTitle TestApp
           vpk upload github --repoUrl https://github.com/squidgy617/UpdaterTest --publish --releaseName "TestApp ${{ steps.get-version.outputs.version }}" --tag v${{ steps.get-version.outputs.version }} --token ${{ secrets.GITHUB_TOKEN }}
