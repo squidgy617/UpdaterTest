@@ -23,13 +23,20 @@ jobs:
       - name: Echo Version
         run: echo "The version is ${{ steps.get-version.outputs.version }}"
 
-      - name: Set up .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: "4.8.x" # Specify the version of .NET you're using
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.3.1
 
-      - name: Publish .NET project
-        run: dotnet publish -c Release --self-contained -r win-x64 -o .\publish
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      - name: Restore NuGet Packages
+        run: nuget restore TestApp/TestApp.sln
+
+      - name: Build Solution
+        run: msbuild TestApp/TestApp.sln /p:Configuration=Release /p:Platform="Any CPU"
+
+      - name: Publish .NET Framework Project
+        run: msbuild TestApp/TestApp.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:OutputPath=.\publish
 
       - name: Create Velopack Release
         run: |
