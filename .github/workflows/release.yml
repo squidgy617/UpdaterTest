@@ -36,7 +36,7 @@ jobs:
         run: msbuild TestApp/TestApp.sln /p:Configuration=Release /p:Platform="Any CPU"
 
       - name: Publish .NET Framework Project
-        run: msbuild TestApp.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:OutputPath=.\publish
+        run: msbuild TestApp/TestApp/TestApp.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:OutputPath=.\publish
 
       - name: Create Velopack Release
         run: |
