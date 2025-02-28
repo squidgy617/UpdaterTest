@@ -37,9 +37,11 @@ namespace TestApp
                 var newVersion = await mgr.CheckForUpdatesAsync();
                 if (newVersion == null)
                 {
+                    MessageBox.Show("No new version found.");
                     return;
                 }
 
+                MessageBox.Show($"New version {newVersion.TargetFullRelease.Version} found.");
                 await mgr.DownloadUpdatesAsync(newVersion);
 
                 mgr.ApplyUpdatesAndRestart(newVersion);
