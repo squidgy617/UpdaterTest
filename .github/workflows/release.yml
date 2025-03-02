@@ -43,6 +43,6 @@ jobs:
           dotnet tool install -g vpk
           vpk download github --repoUrl https://github.com/squidgy617/UpdaterTest
           vpk pack --packId TestApp --packVersion ${{ steps.get-version.outputs.version }} --packDir "${{ github.workspace }}/publish" --mainExe TestApp.exe --packTitle TestApp
-          rm "${{ github.workspace }}/publish/RELEASES"
-          rm "${{ github.workspace }}/publish/TestApp-win-Setup.exe"
+          rm "${{ github.workspace }}/Releases/RELEASES"
+          rm "${{ github.workspace }}/Releases/TestApp-win-Setup.exe"
           vpk upload github --repoUrl https://github.com/squidgy617/UpdaterTest --publish --releaseName "TestApp ${{ steps.get-version.outputs.version }}" --tag v${{ steps.get-version.outputs.version }} --token ${{ secrets.GITHUB_TOKEN }}
